@@ -13,6 +13,14 @@ def index(request):
 
     template_name = 'player/listing.html'
 
+    if request.POST:
+        print(request.POST['player_id'])
+        x = request.POST['player_id']
+        if (Player.objects.get(pk=x)):
+            Player.objects.get(pk=x).delete()
+            return JsonResponse({'result': True})
+        return JsonResponse({'result': False})
+
     if request.GET:
         print("asd")
         return JsonResponse({'result': True})
